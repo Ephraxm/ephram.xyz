@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>meant2be</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+<header class="nav">
+    <div class="logo">meant<span>2</span>be</div>
+    <nav>
+        <a href="#shop">shop</a>
+        <a href="#about">about</a>
+        <a href="#requests">requests</a>
+        <a href="#basket">basket</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        to request for custom designs, or a rework on your own clothing click request (above and follow the steps accordingly.
+    </div>
+</section>
+
+<section id="shop" class="shop">
+    <h2>Shop</h2>
+    <div class="products">
+        <div class="card">
+            <h3>T-Shirt</h3>
+            <p>£15</p>
+            <button onclick="addToBasket('T-Shirt')">Add to basket</button>
+        </div>
+
+        <div class="card">
+            <h3>Hoodie</h3>
+            <p>£35</p>
+            <button onclick="addToBasket('Hoodie')">Add to basket</button>
+        </div>
+    </div>
+</section>
+
+<section id="requests" class="requests">
+    <h2>Custom Request</h2>
+    <input id="name" placeholder="Your name">
+    <textarea id="request" placeholder="Describe your custom design"></textarea>
+    <button onclick="sendRequest()">Send Request</button>
+</section>
+
+<section id="basket" class="basket">
+    <h2>Basket</h2>
+    <ul id="basketList"></ul>
+</section>
+
+<footer>
+    <div class="footer-logo">meant<span>2</span>be</div>
+    <div class="contact">contact: abcdefghijkl@opqr.com</div>
+</footer>
+
+</body>
+</html>

@@ -1,7 +1,68 @@
 
-body { font-family: Arial; background:#111; color:#fff; margin:0; }
-header { display:flex; justify-content:space-between; padding:20px; background:#000; }
-a { color:#0af; margin:10px; text-decoration:none; }
-.products { display:flex; gap:20px; padding:20px; }
-.card { background:#222; padding:20px; border-radius:10px; transition:0.3s; }
-.card:hover { transform:scale(1.05); }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#1fa0b8, #355ad8);
+    color: black;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 22px;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logo span {
+    font-size: 40px;
+}
+
+nav a {
+    margin: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.hero {
+    height: 500px;
+    display: flex;
+    align-items: flex-start;
+    padding: 40px;
+}
+
+.hero-text {
+    margin-top: 40px;
+}
+
+.shop, .requests, .basket {
+    padding: 40px;
+    background: white;
+}
+
+.products {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 200px;
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+}
+
+footer {
+    background: #355ad8;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
