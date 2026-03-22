@@ -77,27 +77,23 @@ nav a:hover {
   width: 100%;
 
   display: flex;
-  justify-content: center;   /* center the group */
+  justify-content: center;  
   align-items: flex-end;
-  gap: 80px;                 /* space between figures */
+  gap: 80px;             
 
   padding: 0 5%;
 }
 
-/* ALL figures same size */
 .figures img {
-  height: 75vh;              /* consistent size */
+  height: 75vh;        
   max-height: 700px;
 
   width: auto;
   object-fit: contain;
 
-  mix-blend-mode: multiply;
-
   display: block;
 }
 
-/* CENTER FIGURE */
 .figure-center {
   position: absolute;
   bottom: 0;
