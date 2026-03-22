@@ -6,20 +6,13 @@
   font-family: Arial, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  margin: 0;
   overflow-x: hidden;
   background: #305ccf;
 }
 
-section {
-  margin: 0;
-  padding: 0;
-  display: block;
+html {
+  scroll-behavior: smooth;
 }
 
 
@@ -78,51 +71,54 @@ nav a:hover {
 }
 
 
-/* FIGURES (FIXED POSITIONING) */
+/* FIGURES (🔥 FIXED PROPERLY) */
 .figures {
   position: absolute;
   bottom: 0;
   width: 100%;
-
-  display: flex;
-  justify-content: center;   /* center them */
-  align-items: flex-end;
-  gap: 80px;                 /* control spacing */
-
-  padding: 0 5%;
+  height: 100%;
 }
 
-.figures img {
-  height: 82vh;              /* larger figures */
+/* CENTER FIGURE */
+.figure-center {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 82vh;
   max-height: 900px;
-  mix-blend-mode: multiply;
 }
 
-/* Fine tuning positions */
-.figures img:first-child {
-  transform: translateX(40px);
+/* LEFT FIGURE */
+.figure-left {
+  position: absolute;
+  bottom: 0;
+  left: 18%;
+  height: 82vh;
+  max-height: 900px;
 }
 
-.figures img:last-child {
-  transform: translateX(-40px);
+/* RIGHT FIGURE */
+.figure-right {
+  position: absolute;
+  bottom: 0;
+  right: 18%;
+  height: 82vh;
+  max-height: 900px;
 }
 
 
-/* FOOTER */
+/* FOOTER (🔥 CLEAN FIX) */
 .footer {
-  position: relative;
   width: 100%;
+  height: calc(100vw * 0.303);
 
   background: url("bottom.png") no-repeat center;
-  background-size: cover;   /* ensures full image visible */
-
-  height: calc(100vw * 0.303); /* 1980x600 ratio */
+  background-size: contain;
 
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.8s ease;
-
-  overflow: hidden;
 }
 
 .footer.show {
@@ -150,11 +146,9 @@ nav a:hover {
     font-size: 14px;
   }
 
-  .figures img {
+  .figure-left,
+  .figure-center,
+  .figure-right {
     height: 32vh;
-  }
-
-  .figures {
-    gap: 30px;
   }
 }
