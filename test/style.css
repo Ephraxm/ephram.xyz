@@ -29,7 +29,8 @@ body {
 
 
 .hero {
-  height: 100vh;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 .bg {
   position:absolute;
@@ -42,6 +43,7 @@ body {
 section {
   margin: 0;
   padding: 0;
+  display: block;
 }
 
 header {
@@ -124,6 +126,10 @@ nav a:hover {
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.8s ease;
+}
+.footer-bg {
+  display: block;
+  margin-top: -4px; 
 }
 .footer-content {
   display: none;
