@@ -78,21 +78,33 @@ nav a:hover {
 }
 
 
-/* FIGURES (🔥 UPDATED) */
+/* FIGURES (FIXED POSITIONING) */
 .figures {
   position: absolute;
   bottom: 0;
   width: 100%;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center;   /* center them */
   align-items: flex-end;
-  padding: 0 6%;
+  gap: 80px;                 /* control spacing */
+
+  padding: 0 5%;
 }
 
 .figures img {
-  height: 82vh;           /* 🔥 50% larger */
-  max-height: 900px;      /* prevents huge screens breaking layout */
+  height: 82vh;              /* larger figures */
+  max-height: 900px;
   mix-blend-mode: multiply;
+}
+
+/* Fine tuning positions */
+.figures img:first-child {
+  transform: translateX(40px);
+}
+
+.figures img:last-child {
+  transform: translateX(-40px);
 }
 
 
@@ -101,10 +113,10 @@ nav a:hover {
   position: relative;
   width: 100%;
 
-  background: url("bottom.png") no-repeat top center;
-  background-size: 100% auto;
+  background: url("bottom.png") no-repeat center;
+  background-size: cover;   /* ensures full image visible */
 
-  height: calc(100vw * 0.303);
+  height: calc(100vw * 0.303); /* 1980x600 ratio */
 
   opacity: 0;
   transform: translateY(40px);
@@ -139,6 +151,10 @@ nav a:hover {
   }
 
   .figures img {
-    height: 32vh;  /* scaled version for mobile */
+    height: 32vh;
+  }
+
+  .figures {
+    gap: 30px;
   }
 }
