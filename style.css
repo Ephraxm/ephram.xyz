@@ -21,6 +21,9 @@ html {
     font-weight: bold;
 }
 
+.figures img {
+  mix-blend-mode: multiply;
+}
 
 .example::-webkit-scrollbar {
     display: none;
