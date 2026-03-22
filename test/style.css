@@ -71,12 +71,30 @@ nav a:hover {
 }
 
 
-/* FIGURES (🔥 FIXED PROPERLY) */
 .figures {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100%;
+
+  display: flex;
+  justify-content: center;   /* center the group */
+  align-items: flex-end;
+  gap: 80px;                 /* space between figures */
+
+  padding: 0 5%;
+}
+
+/* ALL figures same size */
+.figures img {
+  height: 75vh;              /* consistent size */
+  max-height: 700px;
+
+  width: auto;
+  object-fit: contain;
+
+  mix-blend-mode: multiply;
+
+  display: block;
 }
 
 /* CENTER FIGURE */
