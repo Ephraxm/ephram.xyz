@@ -49,6 +49,21 @@
     <div class="contact">contact: abcdefghijkl@opqr.com</div>
   </div>
 </section>
+  <script>
+const footer = document.querySelector('.footer');
 
+function revealFooter() {
+  const trigger = window.innerHeight * 0.85;
+  const footerTop = footer.getBoundingClientRect().top;
+
+  if (footerTop < trigger) {
+    footer.classList.add('show');
+  }
+}
+
+window.addEventListener('scroll', revealFooter);
+window.addEventListener('load', revealFooter);
+</script>
+  <script src="main.js"></script>
 </body>
 </html>
