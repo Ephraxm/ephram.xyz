@@ -104,10 +104,11 @@ nav a:hover {
   position: relative;
   width: 100%;
 
-  background: url("bottom.png") no-repeat center;
-  background-size: contain;
 
-  aspect-ratio: 16 / 4; 
+  background: url("bottom.png") no-repeat center top;
+  background-size: 100% auto; 
+
+  padding-top: 31.25%;
   
   opacity: 0;
   transform: translateY(100px);
@@ -115,8 +116,8 @@ nav a:hover {
 }
 .footer-content {
   position: absolute;
-  inset: 0; 
-  
+  inset: 0;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
