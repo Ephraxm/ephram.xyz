@@ -113,19 +113,16 @@ nav a:hover {
   position: relative;
   width: 100%;
 
-  background-image: url("bottom.png");
-  background-repeat: no-repeat;
-  background-position: top center;
+  background: url("bottom.png") no-repeat top center;
   background-size: 100% auto;
 
-  height: auto;
-  padding-top: 31.25%; 
-
-  overflow: hidden;
+  height: calc(100vw * 0.303);
 
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.8s ease;
+
+  overflow: hidden;
 }
 .footer-bg {
   display: block;
