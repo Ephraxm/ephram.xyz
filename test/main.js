@@ -1,4 +1,4 @@
-let counter = 0; let Title = 'Ephraxm'; let direction = true;
+let counter = 0; let Title = 'Ephraxm | IG'; let direction = true;
 aniTitle = setInterval(function () {
     if (counter == Title.length) direction = false;
     if (counter == false) direction = true;
