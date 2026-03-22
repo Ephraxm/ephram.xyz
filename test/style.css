@@ -3,6 +3,7 @@
   padding:0;
   box-sizing:border-box;
   font-family: Arial, sans-serif;
+  background-repeat: no-repeat;
 }
 
 html {
@@ -110,15 +111,19 @@ nav a:hover {
   position: relative;
   width: 100%;
 
+  background-image: url("bottom.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
 
-  background: url("bottom.png") no-repeat center top;
-  background-size: 100% auto; 
+  height: auto;
+  padding-top: 31.25%; 
 
-  padding-top: 31.25%;
-  
+  overflow: hidden;
+
   opacity: 0;
-  transform: translateY(100px);
-  transition: all 1s ease;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
 }
 .footer-content {
   display: none;
