@@ -80,19 +80,20 @@ nav a:hover {
   color:#002b36;
 }
 
-/* FIGURES */
 .figures {
   position:absolute;
   bottom:0;
   width:100%;
   display:flex;
-  justify-content:space-around;
+  justify-content:space-between;
   align-items:flex-end;
-  padding:0 5%;
+  padding:0 8%;
 }
 
+
 .figures img {
-  height:35vh;
+  height:55vh;           
+  max-height:600px;       
   mix-blend-mode:multiply;
 }
 
