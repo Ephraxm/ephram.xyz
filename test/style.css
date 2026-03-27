@@ -43,7 +43,7 @@ header {
 }
 
 .logo-img {
-  height: 50px;
+  height: 100px;
 }
 
 nav a {
@@ -86,39 +86,12 @@ nav a:hover {
 
 .figures img {
   height: 75vh;        
-  max-height: 700px;
+  max-height: 1700px;
 
   width: auto;
   object-fit: contain;
 
   display: block;
-}
-
-.figure-center {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 82vh;
-  max-height: 900px;
-}
-
-/* LEFT FIGURE */
-.figure-left {
-  position: absolute;
-  bottom: 0;
-  left: 18%;
-  height: 82vh;
-  max-height: 900px;
-}
-
-/* RIGHT FIGURE */
-.figure-right {
-  position: absolute;
-  bottom: 0;
-  right: 18%;
-  height: 82vh;
-  max-height: 900px;
 }
 
 
