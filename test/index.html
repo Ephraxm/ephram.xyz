@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>meant2be</title>
+<title>soulaero</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,47 +15,110 @@
 
 
   <header>
-    <img src="logo.png" class="logo-img">
+    <img src="logo.png" class="logo-img reveal" data-delay="0.1">
 
     <nav>
-      <a href="shop.html">shop</a>
-      <a href="about.html">about</a>
-      <a href="requests.html">requests</a>
-      <a href="basket.html">basket</a>
+      <a href="shop.html" class="reveal" data-delay="0.2">shop</a>
+      <a href="about.html" class="reveal" data-delay="0.3">about</a>
+      <a href="requests.html" class="reveal" data-delay="0.4">requests</a>
+      <a href="basket.html" class="reveal" data-delay="0.5">basket</a>
     </nav>
   </header>
 
   
-  <p class="hero-text">
+  <p class="hero-text reveal">
     to request for custom designs, or a rework on your own clothing click request above and follow the steps accordingly.
   </p>
 
  
   <div class="figures">
-    <img src="figure2.png" class="figure-center">
+    <img src="figure2.png" class="figure-item reveal" data-delay="0">
+    <img src="figure3.png" class="figure-item reveal" data-delay="0.5">
+    <img src="figure4.png" class="figure-item reveal" data-delay="1">
   </div>
 
 </section>
 
 
 
-<section class="footer"></section>
+<section class="footer reveal"></section>
 
 
 <script>
-const footer = document.querySelector('.footer');
+  const reveals = document.querySelectorAll('.reveal');
 
-function revealFooter() {
-  const trigger = window.innerHeight * 0.85;
-  const footerTop = footer.getBoundingClientRect().top;
+  reveals.forEach((el, i) => {
+    const dataDelay = parseFloat(el.dataset.delay);
+    const delay = Number.isFinite(dataDelay) ? dataDelay : i * 0.14;
+    el.style.setProperty('--delay', `${delay}s`);
+  });
 
-  if (footerTop < trigger) {
-    footer.classList.add('show');
+  function initRevealOnLoad() {
+    reveals.forEach((el) => {
+      el.classList.add('visible');
+    });
   }
-}
 
-window.addEventListener('scroll', revealFooter);
-window.addEventListener('load', revealFooter);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target;
+      const dataDelay = parseFloat(el.dataset.delay) || 0;
+
+      if (entry.isIntersecting) {
+        clearTimeout(el._revealTimeout);
+        el._revealTimeout = setTimeout(() => {
+          el.classList.add('visible');
+        }, dataDelay * 1000);
+      } else {
+        clearTimeout(el._revealTimeout);
+        el.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: 0.2,
+  });
+
+  reveals.forEach((el) => observer.observe(el));
+  window.addEventListener('load', initRevealOnLoad);
+
+  // Mobile figure carousel
+  if (window.innerWidth <= 768) {
+    const figures = document.querySelector('.figures');
+    const items = document.querySelectorAll('.figure-item');
+    let currentIndex = 1; // start with middle figure (figure3)
+
+    figures.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    let startX = 0;
+    let isDragging = false;
+
+    figures.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    figures.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault(); // prevent scroll
+    });
+
+    figures.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 50) { // swipe threshold
+        if (diff > 0) {
+          // swipe left, next figure
+          currentIndex = (currentIndex + 1) % items.length;
+        } else {
+          // swipe right, prev figure
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+        }
+      }
+      figures.style.transform = `translateX(-${currentIndex * 100}%)`;
+      isDragging = false;
+    });
+  }
 </script>
   <script src="main.js"></script>
 </body>
