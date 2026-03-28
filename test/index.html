@@ -30,6 +30,11 @@
     to request for custom designs, or a rework on your own clothing click request above and follow the steps accordingly.
   </p>
 
+  <div class="figures-carousel-controls" aria-label="Figure carousel controls">
+    <button type="button" class="figure-arrow figure-arrow-left" aria-label="Show previous figure">&#10094;</button>
+    <button type="button" class="figure-arrow figure-arrow-right" aria-label="Show next figure">&#10095;</button>
+  </div>
+
  
   <div class="figures">
     <img src="figure2.png" class="figure-item reveal" data-delay="0">
@@ -81,42 +86,98 @@
   reveals.forEach((el) => observer.observe(el));
   window.addEventListener('load', initRevealOnLoad);
 
-  // Mobile figure carousel
-  if (window.innerWidth <= 768) {
-    const figures = document.querySelector('.figures');
-    const items = document.querySelectorAll('.figure-item');
-    let currentIndex = 1; // start with middle figure (figure3)
+  const figures = document.querySelector('.figures');
+  const items = Array.from(document.querySelectorAll('.figure-item'));
+  const prevFigureBtn = document.querySelector('.figure-arrow-left');
+  const nextFigureBtn = document.querySelector('.figure-arrow-right');
+  const mobileCarouselQuery = window.matchMedia('(max-width: 768px)');
 
-    figures.style.transform = `translateX(-${currentIndex * 100}%)`;
-
+  if (figures && items.length > 0) {
+    let currentIndex = Math.min(1, items.length - 1);
     let startX = 0;
     let isDragging = false;
+    let isAnimating = false;
+
+    const syncFigureRevealState = () => {
+      if (mobileCarouselQuery.matches) {
+        items.forEach((item) => {
+          item.classList.add('visible');
+          observer.unobserve(item);
+        });
+      } else {
+        items.forEach((item) => {
+          observer.observe(item);
+        });
+      }
+    };
+
+    const updateFigurePosition = () => {
+      if (!mobileCarouselQuery.matches) {
+        figures.style.transform = '';
+        return;
+      }
+
+      figures.style.transform = `translateX(-${currentIndex * 100}%)`;
+    };
+
+    const showNextFigure = () => {
+      if (!mobileCarouselQuery.matches || isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex + 1) % items.length;
+      updateFigurePosition();
+      setTimeout(() => { isAnimating = false; }, 500);
+    };
+
+    const showPreviousFigure = () => {
+      if (!mobileCarouselQuery.matches || isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      updateFigurePosition();
+      setTimeout(() => { isAnimating = false; }, 500);
+    };
 
     figures.addEventListener('touchstart', (e) => {
+      if (!mobileCarouselQuery.matches) return;
       startX = e.touches[0].clientX;
       isDragging = true;
-    });
+    }, { passive: true });
 
     figures.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault(); // prevent scroll
-    });
+      if (!mobileCarouselQuery.matches || !isDragging) return;
+      e.preventDefault();
+    }, { passive: false });
 
     figures.addEventListener('touchend', (e) => {
-      if (!isDragging) return;
+      if (!mobileCarouselQuery.matches || !isDragging) return;
+
       const endX = e.changedTouches[0].clientX;
       const diff = startX - endX;
-      if (Math.abs(diff) > 50) { // swipe threshold
+
+      if (!isAnimating && Math.abs(diff) > 50) {
         if (diff > 0) {
-          // swipe left, next figure
-          currentIndex = (currentIndex + 1) % items.length;
+          showNextFigure();
         } else {
-          // swipe right, prev figure
-          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          showPreviousFigure();
         }
       }
-      figures.style.transform = `translateX(-${currentIndex * 100}%)`;
+
       isDragging = false;
+    });
+
+    if (prevFigureBtn) {
+      prevFigureBtn.addEventListener('click', showPreviousFigure);
+    }
+
+    if (nextFigureBtn) {
+      nextFigureBtn.addEventListener('click', showNextFigure);
+    }
+
+    syncFigureRevealState();
+    updateFigurePosition();
+    window.addEventListener('resize', updateFigurePosition);
+    mobileCarouselQuery.addEventListener('change', () => {
+      syncFigureRevealState();
+      updateFigurePosition();
     });
   }
 </script>
