@@ -219,7 +219,11 @@
 
 		<div class="status" id="statusMessage"></div>
 
-		<form action="send-request.php" method="post">
+		<form action="https://formsubmit.co/business.ephram@gmail.com" method="post">
+			<input type="hidden" name="_subject" value="New Custom Request Submission">
+			<input type="hidden" name="_captcha" value="false">
+			<input type="hidden" name="_template" value="table">
+			<input type="hidden" name="_next" value="https://ephram.xyz/test/requests.html?status=success">
 			<div class="field">
 				<label for="name">Your Name</label>
 				<input id="name" name="name" type="text" maxlength="80" required>
@@ -258,6 +262,7 @@
 			</div>
 
 			<div class="actions">
+				<p class="hint">Replace <strong>your-email@example.com</strong> in the form action with your real email.</p>
 				<button class="submit-btn" type="submit">Send Request</button>
 			</div>
 		</form>
