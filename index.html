@@ -1,68 +1,187 @@
-<!DOCTYPE html><html><head>
-  <meta content="🤬😈🥱" property="og:title">
-  <meta content="" property="og:description">
-  <meta content="https://cdn.discordapp.com/attachments/1032115542909263913/1033436800506667109/IMG_1157.gif?ex=670ab685&is=67096505&hm=47ba846765c9e6ddda7183e46a54a5ccc9751adfb7477a3b042c4e761a88aa67&" property="og:image">    
-  <meta content="#cd0e31" data-react-helmet="true" name="theme-color">
-  <link rel="icon" type="image/x-icon" href="images/xenowo.png">
-  <title>ephram.xyz</title>
-  <link rel="stylesheet" href="css/main.css">
-  <style>
-    @font-face {
-      font-family: 'Help Me';
-      src: url('fonts/HelpMe.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'Cityburn';
-      src: url('fonts/cityburn.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'artifact';
-      src: url('fonts/artifact.ttf') format('truetype');
-    }
-  </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>soulaero</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="overlay" id="overlay">
-    <div class="proceed-button" onclick="removeOverlay(); playMusic()">proceed</div>
+
+
+<section class="hero">
+
+  <img src="background.png" class="bg">
+
+
+  <header>
+    <img src="logo.png" class="logo-img reveal" data-delay="0.1">
+
+    <nav>
+      <a href="shop.html" class="reveal" data-delay="0.2">shop</a>
+      <a href="about.html" class="reveal" data-delay="0.3">about</a>
+      <a href="requests.html" class="reveal" data-delay="0.4">requests</a>
+      <a href="basket.html" class="reveal" data-delay="0.5">basket</a>
+    </nav>
+  </header>
+
+  
+  <p class="hero-text reveal">
+    to request for custom designs, or a rework on your own clothing click request above and follow the steps accordingly.
+  </p>
+
+  <div class="figures-carousel-controls" aria-label="Figure carousel controls">
+    <button type="button" class="figure-arrow figure-arrow-left" aria-label="Show previous figure">&#10094;</button>
+    <button type="button" class="figure-arrow figure-arrow-right" aria-label="Show next figure">&#10095;</button>
   </div>
-  <div class="container">
-    <a href="https://ephram.xyz/" target="_blank" style="text-decoration: none; color: #6f0000;">
-      <h1>ephram.xyz</h1>
-    </a>
-  <a href="https://ephram.xyz/" target="_blank" style="text-decoration: none; color: #9d9090;">
-      <h><center>@larptix</center></h>
-  </a>
+
+ 
+  <div class="figures">
+    <img src="figure2.png" class="figure-item reveal" data-delay="0">
+    <img src="figure3.png" class="figure-item reveal" data-delay="0.5">
+    <img src="figure4.png" class="figure-item reveal" data-delay="1">
   </div>
-  <div id="clock">12:35:46 AM</div>
-  <script>
-    function removeOverlay() {
-      var overlay = document.getElementById("overlay");
-      overlay.style.display = "none";
+
+</section>
+
+
+
+<section class="footer reveal"></section>
+
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+
+  reveals.forEach((el, i) => {
+    const dataDelay = parseFloat(el.dataset.delay);
+    const delay = Number.isFinite(dataDelay) ? dataDelay : i * 0.14;
+    el.style.setProperty('--delay', `${delay}s`);
+  });
+
+  function initRevealOnLoad() {
+    reveals.forEach((el) => {
+      el.classList.add('visible');
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target;
+      const dataDelay = parseFloat(el.dataset.delay) || 0;
+
+      if (entry.isIntersecting) {
+        clearTimeout(el._revealTimeout);
+        el._revealTimeout = setTimeout(() => {
+          el.classList.add('visible');
+        }, dataDelay * 1000);
+      } else {
+        clearTimeout(el._revealTimeout);
+        el.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: 0.2,
+  });
+
+  reveals.forEach((el) => observer.observe(el));
+  window.addEventListener('load', initRevealOnLoad);
+
+  // Mobile figure carousel
+  const figures = document.querySelector('.figures');
+  const items = Array.from(document.querySelectorAll('.figure-item'));
+  const prevFigureBtn = document.querySelector('.figure-arrow-left');
+  const nextFigureBtn = document.querySelector('.figure-arrow-right');
+  const mobileCarouselQuery = window.matchMedia('(max-width: 768px)');
+
+  if (figures && items.length > 0) {
+    let currentIndex = Math.min(1, items.length - 1);
+    let startX = 0;
+    let isDragging = false;
+    let isAnimating = false;
+
+    const syncFigureRevealState = () => {
+      if (mobileCarouselQuery.matches) {
+        items.forEach((item) => {
+          item.classList.add('visible');
+          observer.unobserve(item);
+        });
+      } else {
+        items.forEach((item) => {
+          observer.observe(item);
+        });
+      }
+    };
+
+    const updateFigurePosition = () => {
+      if (!mobileCarouselQuery.matches) {
+        figures.style.transform = '';
+        return;
+      }
+
+      figures.style.transform = `translateX(-${currentIndex * 100}%)`;
+    };
+
+    const showNextFigure = () => {
+      if (!mobileCarouselQuery.matches || isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex + 1) % items.length;
+      updateFigurePosition();
+      setTimeout(() => { isAnimating = false; }, 500);
+    };
+
+    const showPreviousFigure = () => {
+      if (!mobileCarouselQuery.matches || isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      updateFigurePosition();
+      setTimeout(() => { isAnimating = false; }, 500);
+    };
+
+    figures.addEventListener('touchstart', (e) => {
+      if (!mobileCarouselQuery.matches) return;
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    }, { passive: true });
+
+    figures.addEventListener('touchmove', (e) => {
+      if (!mobileCarouselQuery.matches || !isDragging) return;
+      e.preventDefault();
+    }, { passive: false });
+
+    figures.addEventListener('touchend', (e) => {
+      if (!mobileCarouselQuery.matches || !isDragging) return;
+
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (!isAnimating && Math.abs(diff) > 50) {
+        if (diff > 0) {
+          showNextFigure();
+        } else {
+          showPreviousFigure();
+        }
+      }
+
+      isDragging = false;
+    });
+
+    if (prevFigureBtn) {
+      prevFigureBtn.addEventListener('click', showPreviousFigure);
     }
 
-    function updateClock() {
-      const now = new Date();
-      const options = {
-        timeZone: 'Europe/London',
-        hour12: true,
-        hour: 'numeric',
-        minute: '2-digit',
-        second: '2-digit'
-      };
-      const formattedTime = now.toLocaleTimeString('en-US', options);
-	  
-      document.getElementById('clock').textContent = formattedTime;
+    if (nextFigureBtn) {
+      nextFigureBtn.addEventListener('click', showNextFigure);
     }
-	function playMusic() {
-          var audio = new Audio('main.mp3');
-          audio.volume = 0.3;
-          audio.play();
-      }
+
+    syncFigureRevealState();
+    updateFigurePosition();
+    window.addEventListener('resize', updateFigurePosition);
+    mobileCarouselQuery.addEventListener('change', () => {
+      syncFigureRevealState();
+      updateFigurePosition();
+    });
+  }
 </script>
-  <script src="js/main.js"></script>
-  <script src="js/geek.js"></script>
-  <script src="js/disable_inspect.js"></script>
-  <script src="js/disable-devtool.min.js"></script>
-  <script src="js/funny.js"></script>
-  <script src="script.js"></script> 
-</body></html>
+  <script src="main.js"></script>
+</body>
+</html>

