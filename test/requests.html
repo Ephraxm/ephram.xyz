@@ -100,6 +100,16 @@
 			border: 1px solid #fca5a5;
 		}
 
+		.file-error {
+			color: var(--err-text);
+			font-size: 0.86rem;
+			display: none;
+		}
+
+		.file-error.show {
+			display: block;
+		}
+
 		form {
 			padding: 22px 24px 24px;
 			display: grid;
@@ -219,7 +229,7 @@
 
 		<div class="status" id="statusMessage"></div>
 
-		<form action="https://formsubmit.co/business.ephram@gmail.com" method="post">
+		<form action="https://formsubmit.co/business.ephram@gmail.com" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="_subject" value="New Custom Request Submission">
 			<input type="hidden" name="_captcha" value="false">
 			<input type="hidden" name="_template" value="table">
@@ -239,21 +249,28 @@
 				<label for="requestType">Request Type</label>
 				<select id="requestType" name="request_type" required>
 					<option value="" selected disabled>Select one</option>
-					<option value="Website">Vest</option>
-					<option value="Logo/Branding">Shirt</option>
-					<option value="Script/Automation">Trousers</option>
-					<option value="Other">Other</option>
+					<option value="Vest">Vest</option>
+					<option value="Jumper">Jumper</option>
+					<option value="T-shirt">T-shirt</option>
+					<option value="Other (write below)">Other</option>
 				</select>
 			</div>
 
 			<div class="field">
-				<label for="budget">Budget (USD)</label>
-				<input id="budget" name="budget" type="text" maxlength="30" placeholder="e.g. 100-250">
+				<label for="budget">Budget</label>
+				<input id="budget" name="budget" type="text" maxlength="30" placeholder="e.g. 30 - 100">
 			</div>
 
 			<div class="field field-full">
 				<label for="details">Request Details</label>
 				<textarea id="details" name="details" required placeholder="Describe exactly what you need, style references, features, and anything important."></textarea>
+			</div>
+
+			<div class="field field-full">
+				<label for="referenceImage">Attach Reference Image (optional)</label>
+				<input id="referenceImage" name="attachment" type="file" accept="image/*" multiple>
+				<p class="hint">Accepted: image files only, up to 3 images.</p>
+				<p class="file-error" id="fileError">Please select up to 3 images only.</p>
 			</div>
 
 			<div class="hidden-field" aria-hidden="true">
@@ -262,7 +279,7 @@
 			</div>
 
 			<div class="actions">
-				<p class="hint">Replace <strong>your-email@example.com</strong> in the form action with your real email.</p>
+				<p class="hint">You can send your own clothes to be modified.</p>
 				<button class="submit-btn" type="submit">Send Request</button>
 			</div>
 		</form>
@@ -271,6 +288,9 @@
 	<script>
 		(function () {
 			var statusEl = document.getElementById('statusMessage');
+			var formEl = document.querySelector('form');
+			var fileInputEl = document.getElementById('referenceImage');
+			var fileErrorEl = document.getElementById('fileError');
 			var params = new URLSearchParams(window.location.search);
 			var status = params.get('status');
 
@@ -284,6 +304,23 @@
 				statusEl.className = 'status error';
 				statusEl.textContent = 'Please complete all required fields before submitting.';
 			}
+
+			formEl.addEventListener('submit', function (event) {
+				var files = fileInputEl.files;
+				if (files && files.length > 3) {
+					event.preventDefault();
+					fileErrorEl.classList.add('show');
+					return;
+				}
+
+				fileErrorEl.classList.remove('show');
+			});
+
+			fileInputEl.addEventListener('change', function () {
+				if (fileInputEl.files && fileInputEl.files.length <= 3) {
+					fileErrorEl.classList.remove('show');
+				}
+			});
 		})();
 	</script>
 </body>
