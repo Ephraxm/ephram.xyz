@@ -69,6 +69,14 @@ nav a:hover {
   color: #002b36;
 }
 
+.figures-carousel-controls {
+  display: none;
+}
+
+.figure-arrow {
+  display: none;
+}
+
 
 .figures {
   position: absolute;
@@ -184,22 +192,64 @@ nav a:hover {
   .figures {
     position: absolute;
     bottom: 0;
-    max-height: 55vh;
-    gap: 16px;
-    padding: 0 10px;
-    justify-content: space-between;
-    overflow: hidden;
+    max-height: 100vh;
+    gap: 0;
+    padding: 0;
+    justify-content: flex-start;
+    overflow: visible;
     width: 100%;
     display: flex;
     transition: transform 0.3s ease;
   }
 
+  .figures-carousel-controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    pointer-events: none;
+  }
+
+  .figure-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 24px;
+    line-height: 1;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  .figure-arrow:active {
+    transform: scale(0.96);
+  }
+
   .figure-item {
-    height: 52vh;
-    max-height: 260px;
+    height: 100vh;
+    max-height: 460px;
     width: 100%;
     flex-shrink: 0;
     object-fit: contain;
+  }
+
+  .figure-item.reveal,
+  .figure-item.reveal.visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .footer {
@@ -221,5 +271,10 @@ nav a:hover {
     height: 80vh !important;
     max-height: 120000px !important;
     flex-shrink: 1 !important;
+  }
+
+  .figures-carousel-controls,
+  .figure-arrow {
+    display: none !important;
   }
 }
